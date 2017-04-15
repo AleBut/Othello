@@ -35,6 +35,8 @@
 		<Unit filename="Config.h" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.h" />
+		<Unit filename="Tablier.cpp" />
+		<Unit filename="Tablier.h" />
 		<Unit filename="console.cpp" />
 		<Unit filename="console.h" />
 		<Unit filename="main.cpp" />

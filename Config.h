@@ -2,7 +2,7 @@
 #define CONFIG_H_INCLUDED
 
 // Infos basiques tablier
-#define TAB_TAILLE 8
+#define TAB_TAILLE 4
 #define NBRE_PIONS TAB_TAILLE * TAB_TAILLE
 #define NOIR 'n'
 #define BLANC 'b'

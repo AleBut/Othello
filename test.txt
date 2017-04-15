@@ -1,9 +1,5 @@
-b
-xxxxxxxx
-xxxxxxxx
-xxxnxxxx
-xxxnnxxx
-xxxnbxxx
-xxxxxxxx
-xxxxxxxx
-xxxxxxxx
+n
+bbnn
+bbbb
+nnbb
+nbbb
