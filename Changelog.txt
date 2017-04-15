@@ -1,0 +1,5 @@
+1.0: Jeux de base entre 2 joueurs
+2.0: Ajout de l'intelligence artificielle pour jouer de manière random
+3.0: Ajout de l'intelligence artificielle MinMax
+3.5: refonte du système de détection de coup valide
+allégement de la classe noeud, et ajout d'un curseur pour voir le coup joué par l'AI
