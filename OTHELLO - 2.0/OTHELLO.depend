@@ -1,0 +1,96 @@
+# depslib dependency file v1.0
+1491668112 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello\main.cpp
+	"Game.h"
+
+1491668892 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello\game.cpp
+	<stdlib.h>
+	<fstream>
+	<stdlib.h>
+	<string>
+	<sstream>
+	"Game.h"
+
+1491658109 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello\game.h
+	<iostream>
+	"console.h"
+	"Config.h"
+
+1491668892 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello\config.h
+
+1491131546 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello\console.cpp
+	"console.h"
+	<conio.h>
+	<windows.h>
+
+1491132067 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello\console.h
+	<iostream>
+
+1491131546 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\console.cpp
+	"console.h"
+	<conio.h>
+	<windows.h>
+
+1491132067 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\console.h
+	<iostream>
+
+1491668112 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\main.cpp
+	"Game.h"
+
+1491759690 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\game.h
+	"Tablier.h"
+	"console.h"
+
+1491759814 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\config.h
+
+1491760006 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\tablier.h
+	"Config.h"
+
+1491759973 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\game.cpp
+	<stdlib.h>
+	<stdlib.h>
+	<string>
+	<sstream>
+	<iostream>
+	"Game.h"
+
+1491759763 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\tablier.cpp
+	"Tablier.h"
+	<fstream>
+	<string>
+	<iostream>
+
+1491131546 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 2.0\console.cpp
+	"console.h"
+	<conio.h>
+	<windows.h>
+
+1491132067 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 2.0\console.h
+	<iostream>
+
+1491760956 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 2.0\game.cpp
+	<stdlib.h>
+	<stdlib.h>
+	<string>
+	<sstream>
+	<iostream>
+	<Windows.h>
+	"Game.h"
+
+1491759690 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 2.0\game.h
+	"Tablier.h"
+	"console.h"
+
+1491760006 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 2.0\tablier.h
+	"Config.h"
+
+1491759814 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 2.0\config.h
+
+1491668112 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 2.0\main.cpp
+	"Game.h"
+
+1491764845 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 2.0\tablier.cpp
+	"Tablier.h"
+	<fstream>
+	<string>
+	<iostream>
+
