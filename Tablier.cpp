@@ -2,7 +2,7 @@
 
 #include <fstream> // Dossiers
 #include <string> // Concaténation des strings
-#include <iostream>
+#include <iostream> // I/O
 
 
 Tablier::Tablier()
@@ -46,6 +46,9 @@ void Tablier::reinitialiserTablier()
 	m_tab	[TAB_TAILLE/2]		[TAB_TAILLE/2]		= BLANC;
 	m_tab	[TAB_TAILLE/2]		[(TAB_TAILLE/2)-1]	= NOIR;
 	m_tab	[(TAB_TAILLE/2)-1]	[TAB_TAILLE/2]		= NOIR;
+
+	// On reinitialise le tour de jouer
+	m_tourDeJouer = NOIR;
 }
 
 void Tablier::chargerTablier()
@@ -180,6 +183,22 @@ bool Tablier::caseLibre(int x, int y)
 		return false;
 }
 
+int Tablier::nombreDePion(char couleur)
+{
+	/// Données
+	int compteur = 0;
+
+	/// Traitement
+	for(int y=0; y<TAB_TAILLE; y++)
+	{
+		for(int x=0; x<TAB_TAILLE; x++)
+		{
+			if(m_tab[x][y] == couleur)
+				compteur++;
+		}
+	}
+	return compteur;
+}
 
 void Tablier::avancerTour()
 {
@@ -200,6 +219,5 @@ bool Tablier::finDuJeux()
 		}
 	}
 	// Si aucune condition n'a renvoyé false, donc qu'il n'y a pas de sélection valide que l'on peut faire, c'est la fin du jeux
-	this->sauvegarderTablier();
 	return true;
 }

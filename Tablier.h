@@ -9,7 +9,7 @@ class Tablier
 	public:
 		int m_nombreDePions; // Nombre de pion totale
 		char m_tab[TAB_TAILLE][TAB_TAILLE]; // Tablier
-		char m_tourDeJouer; // Quel partie doit jouer?
+		char m_tourDeJouer; // Quel joueur doit jouer?
 
 
 		// Constructeur & Destructeur
@@ -25,6 +25,7 @@ class Tablier
 		bool selectionValide(int x, int y); // On vérifie si la case est valide
 		void poserPion(int x, int y); // On pose un pion sur cette case
 		bool caseLibre(int x, int y); // On vérifie si la case est libre
+		int nombreDePion(char couleur); // Renvoit le nombre de pions des joueurs jouant
 
 
 		void avancerTour(); // On avance le tour en changeant la variable m_tourDeJouer

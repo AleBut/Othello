@@ -32,9 +32,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Arbre.cpp" />
+		<Unit filename="Arbre.h" />
 		<Unit filename="Config.h" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.h" />
+		<Unit filename="Noeud.cpp" />
+		<Unit filename="Noeud.h" />
 		<Unit filename="Tablier.cpp" />
 		<Unit filename="Tablier.h" />
 		<Unit filename="console.cpp" />
