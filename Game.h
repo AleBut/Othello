@@ -21,13 +21,16 @@ public:
 	void menu(); // Propose un menu permettant aux utilisateurs de sélectionner des modes de jeux
 
 	void modeJoueurVJoueur(); // Joueurs contre Joueurs
-	void modeIARVJoueur(); // Intelligence Artificielle Random contre Joueurs
+	void modeIARVJoueur(); // Intelligence Artificielle Random contre Joueur
+	void modeIAMinMaxVJoueur(); // Intelligence Artificielle avec algorithme Minimum Max contre Joueur
 
 	void joueurJoue(); // Le joueur sélectionne un pion et joue
 	void IARJoue(); // L'IA Random joue
+	void IAMinMaxJoue(); // L'IA Minimum Max joue
 
 	void afficherTablier(); // On affiche le tablier
 	void afficherMessage(std::string message); // On affiche un message sur le côté
+	void mettreEnSurbrillance(int x, int y, Color c); // Met en surbrillance une case
 
 	void selectionCase(int &x, int &y); // On retourne les coordonnées X et Y d'une case choisie par l'utilisateur
 	void trouverVainqueur(); // Affiche les scores et le vainqueur

@@ -2,9 +2,10 @@
 
 #include <fstream> // Dossiers
 #include <string> // Concaténation des strings
-#include <iostream>
+#include <iostream> // I/O
 
 
+/// Constructeur & destructeurs
 Tablier::Tablier()
 		:m_nombreDePions(NBRE_PIONS), m_tourDeJouer(NOIR)
 {
@@ -30,6 +31,7 @@ Tablier::~Tablier()
 }
 
 
+/// Méthodes
 void Tablier::reinitialiserTablier()
 {
 	// Remplissage tableau
@@ -46,6 +48,9 @@ void Tablier::reinitialiserTablier()
 	m_tab	[TAB_TAILLE/2]		[TAB_TAILLE/2]		= BLANC;
 	m_tab	[TAB_TAILLE/2]		[(TAB_TAILLE/2)-1]	= NOIR;
 	m_tab	[(TAB_TAILLE/2)-1]	[TAB_TAILLE/2]		= NOIR;
+
+	// On reinitialise le tour de jouer
+	m_tourDeJouer = NOIR;
 }
 
 void Tablier::chargerTablier()
@@ -102,37 +107,24 @@ void Tablier::sauvegarderTablier() //!\\ Changer plus tard le "text.txt" en SAVE
 
 
 
-
 bool Tablier::selectionValide(int x, int y)
 {
-	/// Données
-	char pionEnnemi, pion = m_tourDeJouer;
-
 	/// Traitement
-	if(pion == NOIR) 	pionEnnemi = BLANC;
-	if(pion == BLANC) 	pionEnnemi = NOIR;
 
-	if(!(this->caseLibre(x,y))) // 1er test
+	if(!(this->caseLibre(x, y)))
 		return false;
 
-	if((x-2 >= 0) && (y-2 >= 0))
-		if(	(m_tab[x-1][y-1] == pionEnnemi) 	&& 		(m_tab[x-2][y-2] == pion)	)	return true; // Haut-Gauche
-	if(y-2 >= 0)
-		if(	(m_tab[x][y-1] == pionEnnemi) 		&&		(m_tab[x][y-2] == pion)		)	return true; // Haut
-	if((x+2 < TAB_TAILLE) && (y-2 >= 0))
-		if(	(m_tab[x+1][y-1] == pionEnnemi) 	&& 		(m_tab[x+2][y-2] == pion) 	)	return true; // Haut-Droit
+	if(this->voisinageRecursive(x, y, -1, -1))	return true; // Haut-gauche
+	if(this->voisinageRecursive(x, y, 0, -1))	return true; // Haut
+	if(this->voisinageRecursive(x, y, 1, -1))	return true; // Haut-droite
 
-	if(x-2 >= 0)
-		if(	(m_tab[x-1][y] == pionEnnemi) 		&& 		(m_tab[x-2][y] == pion)		)	return true; // Middle-Gauche
-	if(x+2 < TAB_TAILLE)
-		if(	(m_tab[x+1][y] == pionEnnemi) 		&& 		(m_tab[x+2][y] == pion)		)	return true; // Middle-Droit
+	if(this->voisinageRecursive(x, y, -1, 0))	return true; // Gauche
+	if(this->voisinageRecursive(x, y, 1, 0))	return true; // Droite
 
-	if((x-2 >= 0) && (y+2 < TAB_TAILLE))
-		if(	(m_tab[x-1][y+1] == pionEnnemi) 	&& 		(m_tab[x-2][y+2] == pion)	)	return true; // Bas-Gauche
-	if(y+2 < TAB_TAILLE)
-		if(	(m_tab[x][y+1] == pionEnnemi) 		&&		(m_tab[x][y+2] == pion)		)	return true; // Bas
-	if((x+2 < TAB_TAILLE) && (y+2 < TAB_TAILLE))
-		if(	(m_tab[x+1][y+1] == pionEnnemi) 	&& 		(m_tab[x+2][y+2] == pion) 	)	return true; // Bas-Droit
+	if(this->voisinageRecursive(x, y, -1, 1))	return true; // Bas-gauche
+	if(this->voisinageRecursive(x, y, 0, 1))	return true; // Bas
+	if(this->voisinageRecursive(x, y, 1, 1))	return true; // Bas-droite
+
 
 	// Si aucune des conditions précédentes n'a retourné vraie
 	return false;
@@ -140,36 +132,20 @@ bool Tablier::selectionValide(int x, int y)
 
 void Tablier::poserPion(int x, int y)
 {
-	/// Données
-	char pionEnnemi, pion = m_tourDeJouer;
-
 	/// Traitement
-	if(pion == NOIR) 	pionEnnemi = BLANC;
-	if(pion == BLANC) 	pionEnnemi = NOIR;
+	if(this->voisinageRecursive(x, y, -1, -1))	this->retournerPionsRecursive(x, y, -1, -1);	// Haut-gauche
+	if(this->voisinageRecursive(x, y, 0, -1))	this->retournerPionsRecursive(x, y, 0, -1);		// Haut
+	if(this->voisinageRecursive(x, y, 1, -1))	this->retournerPionsRecursive(x, y, 1, -1);		// Haut-droite
 
-	/// Traitement
-	// Pion au milieu
-	if((x-2 >= 0) && (y-2 >= 0))
-		if(	(m_tab[x-1][y-1] == pionEnnemi) 	&& 		(m_tab[x-2][y-2] == pion)	)	m_tab[x-1][y-1] = pion; // Haut-Gauche
-	if(y-2 >= 0)
-		if(	(m_tab[x][y-1] == pionEnnemi) 		&&		(m_tab[x][y-2] == pion)		)	m_tab[x][y-1] 	= pion; // Haut
-	if((x+2 < TAB_TAILLE) && (y-2 >= 0))
-		if(	(m_tab[x+1][y-1] == pionEnnemi) 	&& 		(m_tab[x+2][y-2] == pion) 	)	m_tab[x+1][y-1] = pion; // Haut-Droit
+	if(this->voisinageRecursive(x, y, -1, 0))	this->retournerPionsRecursive(x, y, -1, 0); 	// Gauche
+	if(this->voisinageRecursive(x, y, 1, 0))	this->retournerPionsRecursive(x, y, 1, 0);		// Droite
 
-	if(x-2 >= 0)
-		if(	(m_tab[x-1][y] == pionEnnemi) 		&& 		(m_tab[x-2][y] == pion)		)	m_tab[x-1][y] = pion; // Middle-Gauche
-	if(x+2 < TAB_TAILLE)
-		if(	(m_tab[x+1][y] == pionEnnemi) 		&& 		(m_tab[x+2][y] == pion)		)	m_tab[x+1][y] = pion; // Middle-Droit
-
-	if((x-2 >= 0) && (y+2 < TAB_TAILLE))
-		if(	(m_tab[x-1][y+1] == pionEnnemi) 	&& 		(m_tab[x-2][y+2] == pion)	)	m_tab[x-1][y+1] = pion; // Bas-Gauche
-	if(y+2 < TAB_TAILLE)
-		if(	(m_tab[x][y+1] == pionEnnemi) 		&&		(m_tab[x][y+2] == pion)		)	m_tab[x][y+1] 	= pion; // Bas
-	if((x+2 < TAB_TAILLE) && (y+2 < TAB_TAILLE))
-		if(	(m_tab[x+1][y+1] == pionEnnemi) 	&& 		(m_tab[x+2][y+2] == pion) 	)	m_tab[x+1][y+1] = pion; // Bas-Droit
+	if(this->voisinageRecursive(x, y, -1, 1))	this->retournerPionsRecursive(x, y, -1, 1); 	// Bas-gauche
+	if(this->voisinageRecursive(x, y, 0, 1))	this->retournerPionsRecursive(x, y, 0, 1); 		// Bas
+	if(this->voisinageRecursive(x, y, 1, 1))	this->retournerPionsRecursive(x, y, 1, 1); 		// Bas-droite
 
 	// Pion à l'endroit souhaité
-	m_tab[x][y] = pion;
+	m_tab[x][y] = m_tourDeJouer;
 }
 
 bool Tablier::caseLibre(int x, int y)
@@ -179,6 +155,61 @@ bool Tablier::caseLibre(int x, int y)
 	else
 		return false;
 }
+
+bool Tablier::voisinageRecursive(int x, int y, int dx, int dy)
+{
+	/// Données
+	int newX = x + dx, newY = y+ dy;
+
+	/// Traitement
+	if((newX >= TAB_TAILLE ) || (newX < 0 ) || (newY >= TAB_TAILLE ) || (newY < 0 )) // Si on a dépassé le tableau
+		return false;
+
+	if(this->caseLibre(newX, newY)) // Si il n'y a aucun pion sur cette case
+		return false;
+
+	if((this->caseLibre(x, y)) && (m_tab[newX][newY] == m_tourDeJouer)) // Si il s'agit de poser un pion à côté d'un autre pion allié
+		return false;
+
+	if(m_tab[newX][newY] == m_tourDeJouer) // Si le pion suivant est de la même couleur que nous
+		return true;
+	else
+		return this->voisinageRecursive(newX, newY, dx, dy); // Sinon, le pion est blanc et on rappelle la fonction récursive
+}
+
+void Tablier::retournerPionsRecursive(int x, int y, int dx, int dy)
+{
+	/// Données
+	int newX = x + dx, newY = y + dy;
+
+	/// Traitement
+	if(m_tab[newX][newY] == m_tourDeJouer) // On a atteint un pion allié, soit l'extremité de l'encadrement
+		return;
+	else { 	// Sinon, on est forcément tombé sur un pion ennemi qu'on retourne, et on rappelle la fonction récursive
+		m_tab[newX][newY] = m_tourDeJouer;
+		this->retournerPionsRecursive(newX, newY, dx, dy);
+	}
+}
+
+
+
+int Tablier::nombreDePion(char couleur)
+{
+	/// Données
+	int compteur = 0;
+
+	/// Traitement
+	for(int y=0; y<TAB_TAILLE; y++)
+	{
+		for(int x=0; x<TAB_TAILLE; x++)
+		{
+			if(m_tab[x][y] == couleur)
+				compteur++;
+		}
+	}
+	return compteur;
+}
+
 
 
 void Tablier::avancerTour()
@@ -200,6 +231,5 @@ bool Tablier::finDuJeux()
 		}
 	}
 	// Si aucune condition n'a renvoyé false, donc qu'il n'y a pas de sélection valide que l'on peut faire, c'est la fin du jeux
-	this->sauvegarderTablier();
 	return true;
 }
