@@ -2,10 +2,10 @@
 #define CONFIG_H_INCLUDED
 
 // Infos basiques tablier
-#define TAB_TAILLE 4
+#define TAB_TAILLE 8
 #define NBRE_PIONS TAB_TAILLE * TAB_TAILLE
-#define NOIR 'n'
-#define BLANC 'b'
+#define NOIR 'n'							// Représente le 1er joueur
+#define BLANC 'b'							// Représente le 2nd joueur, ou l'IA
 #define VIDE 'x'
 
 // Code ASCII
@@ -28,5 +28,7 @@
 #define BUTTON_ENTER 	13
 #define BUTTON_ESC 		27
 
+// Arbre de l'algorithme MinMax
+#define PROFONDEUR 8
 
 #endif // CONFIG_H_INCLUDED

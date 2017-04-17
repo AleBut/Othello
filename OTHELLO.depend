@@ -33,27 +33,27 @@
 1491132067 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\console.h
 	<iostream>
 
-1491668112 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\main.cpp
+1492171362 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\main.cpp
 	"Game.h"
 
-1491759690 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\game.h
+1492251842 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\game.h
 	"Tablier.h"
 	"console.h"
 
-1491759814 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\config.h
+1492255593 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\config.h
 
-1491760006 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\tablier.h
+1492251133 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\tablier.h
 	"Config.h"
 
-1491759973 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\game.cpp
+1492252793 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\game.cpp
 	<stdlib.h>
-	<stdlib.h>
-	<string>
 	<sstream>
 	<iostream>
+	<Windows.h>
 	"Game.h"
+	"Arbre.h"
 
-1491759763 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\tablier.cpp
+1492252509 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\tablier.cpp
 	"Tablier.h"
 	<fstream>
 	<string>
@@ -89,6 +89,68 @@
 	"Game.h"
 
 1491764845 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 2.0\tablier.cpp
+	"Tablier.h"
+	<fstream>
+	<string>
+	<iostream>
+
+1492253210 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\noeud.cpp
+	"Noeud.h"
+
+1492253210 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\noeud.h
+	<vector>
+	"Tablier.h"
+
+1492251133 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\arbre.cpp
+	"Arbre.h"
+	<iostream>
+
+1492251133 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\arbre.h
+	"Noeud.h"
+
+1492251133 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\arbre.cpp
+	"Arbre.h"
+	<iostream>
+
+1492251133 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\arbre.h
+	"Noeud.h"
+
+1492253210 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\noeud.h
+	<vector>
+	"Tablier.h"
+
+1492251133 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\tablier.h
+	"Config.h"
+
+1492268521 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\config.h
+
+1491131546 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\console.cpp
+	"console.h"
+	<conio.h>
+	<windows.h>
+
+1491132067 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\console.h
+	<iostream>
+
+1492252793 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\game.cpp
+	<stdlib.h>
+	<sstream>
+	<iostream>
+	<Windows.h>
+	"Game.h"
+	"Arbre.h"
+
+1492251842 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\game.h
+	"Tablier.h"
+	"console.h"
+
+1492171362 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\main.cpp
+	"Game.h"
+
+1492253210 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\noeud.cpp
+	"Noeud.h"
+
+1492252509 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\tablier.cpp
 	"Tablier.h"
 	<fstream>
 	<string>
