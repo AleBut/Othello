@@ -25,8 +25,10 @@ class Tablier
 		bool selectionValide(int x, int y); // On vérifie si la case est valide
 		void poserPion(int x, int y); // On pose un pion sur cette case
 		bool caseLibre(int x, int y); // On vérifie si la case est libre
-		int nombreDePion(char couleur); // Renvoit le nombre de pions des joueurs jouant
+		bool voisinageRecursive(int x, int y, int dx, int dy); // Permet de vérifier dans une direction que la pose d'un pion est valide
+		void retournerPionsRecursive(int x, int y, int dx, int dy); // Permet de retourner les pions dans une direction
 
+		int nombreDePion(char couleur); // Renvoit le nombre de pions des joueurs jouant
 
 		void avancerTour(); // On avance le tour en changeant la variable m_tourDeJouer
 		bool finDuJeux(); // Returne vrai si on ne peut plus poser de pion

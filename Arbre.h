@@ -16,6 +16,8 @@ public:
 
 	// Methodes
 	void trouverMeilleurCoup(int &x, int &y); // Trouve en fonction de la profondeur le meilleur coup que la machine peut jouer
+	void tracerArbre(); // On trace toute les possibilités
+	void remonterArbre(); // On remonte l'arbre des racines en sélectionnant le Min ou Max
 };
 
 #endif // ARBRE_H_INCLUDED

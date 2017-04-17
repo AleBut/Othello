@@ -128,7 +128,6 @@ void Game::modeIARVJoueur()
 		}
 		else if(m_tablier.m_tourDeJouer == BLANC) {
 			this->afficherMessage("L'ordinateur joue      ");
-			Sleep(1000); // Délai car l'IA joue instantanément ici
 			this->IARJoue(); // L'IA joue
 		}
 		this->afficherTablier(); // Affichage du tablier
@@ -151,7 +150,6 @@ void Game::modeIAMinMaxVJoueur()
 		}
 		else if(m_tablier.m_tourDeJouer == BLANC) {
 			this->afficherMessage("L'ordinateur joue      ");
-			Sleep(1000); // Délai car l'IA joue instantanément
 			this->IAMinMaxJoue(); // L'IA joue
 		}
 		this->afficherTablier(); // Affichage du tablier
@@ -208,6 +206,8 @@ void Game::IARJoue()
 
 				if(nombreDeCoupsPossibles == numeroPionSelectionne) {
 					m_tablier.poserPion(x, y);
+					this->mettreEnSurbrillance(x, y, COLOR_GREEN); // On met en surbrillance le coup joué pour aider le spectateur
+					Sleep(1000); // Délai car l'IA joue instantanément ici
 					return;
 				}
 			}
@@ -224,12 +224,15 @@ void Game::IAMinMaxJoue()
 	/// Traitement
 	A.trouverMeilleurCoup(x, y);
 	m_tablier.poserPion(x, y);
+	this->mettreEnSurbrillance(x, y, COLOR_GREEN);
+	Sleep(1000); // Délai car l'IA joue instantanément
 }
 
 
 
 void Game::afficherTablier()
 {
+	m_pConsole->setColor(COLOR_BLACK, COLOR_GRAY); // On remet la couleur d'origine (précaution)
 	system("cls");
 
 	for(int y=0; y<TAB_TAILLE; y++)
@@ -255,6 +258,16 @@ void Game::afficherMessage(std::string message)
     std::cout << message;
 }
 
+void Game::mettreEnSurbrillance(int x, int y, Color c)
+{
+	m_pConsole->gotoLigCol((X0 + x*ESPACEMENT_X), (Y0+ y*ESPACEMENT_Y));
+	switch(m_tablier.m_tab[x][y])
+	{
+		case NOIR:	m_pConsole->setColor(COLOR_BLACK, c);	std::cout << LOGO_PION; break;
+		case BLANC: m_pConsole->setColor(COLOR_WHITE, c); 	std::cout << LOGO_PION; break;
+		default: 	m_pConsole->setColor(COLOR_BLUE, c); 	std::cout << LOGO_VIDE; break;
+	}
+}
 
 
 void Game::selectionCase(int &x, int &y)
@@ -265,13 +278,7 @@ void Game::selectionCase(int &x, int &y)
 	/// Traitement
 
 	// On colorie la 1ère case [0][0] pour montrer la position initiale du curseur
-	m_pConsole->gotoLigCol((X0 + x*ESPACEMENT_X), (Y0+ y*ESPACEMENT_Y));
-	switch(m_tablier.m_tab[x][y])
-	{
-		case NOIR:	m_pConsole->setColor(COLOR_BLACK, COLOR_RED);	std::cout << LOGO_PION; break;
-		case BLANC: m_pConsole->setColor(COLOR_WHITE, COLOR_RED); 	std::cout << LOGO_PION; break;
-		default: 	m_pConsole->setColor(COLOR_BLUE, COLOR_RED); 	std::cout << LOGO_VIDE; break;
-	}
+	this->mettreEnSurbrillance(x, y, COLOR_RED);
 
 	do
 	{
@@ -297,26 +304,14 @@ void Game::selectionCase(int &x, int &y)
 				dy = 0;
 
 			// On regrise l'arrière plan (utiliser la fonction afficher utilise ressources) du curseur précédent
-			m_pConsole->gotoLigCol((X0 + x*ESPACEMENT_X), (Y0+ y*ESPACEMENT_Y));
-			switch(m_tablier.m_tab[x][y])
-			{
-			case NOIR:	m_pConsole->setColor(COLOR_BLACK, COLOR_GRAY);	std::cout << LOGO_PION; break;
-			case BLANC: m_pConsole->setColor(COLOR_WHITE, COLOR_GRAY); 	std::cout << LOGO_PION; break;
-			default: 	m_pConsole->setColor(COLOR_BLUE, COLOR_GRAY); 	std::cout << LOGO_VIDE; break;
-			}
+			this->mettreEnSurbrillance(x, y, COLOR_GRAY);
 
 			// Calcul de la nouvelle position
 			x += dx;
 			y += dy;
 
 			// On colorie le curseur
-			m_pConsole->gotoLigCol((X0 + x*ESPACEMENT_X), (Y0+ y*ESPACEMENT_Y));
-			switch(m_tablier.m_tab[x][y])
-			{
-			case NOIR:	m_pConsole->setColor(COLOR_BLACK, COLOR_RED);	std::cout << LOGO_PION; break;
-			case BLANC: m_pConsole->setColor(COLOR_WHITE, COLOR_RED); 	std::cout << LOGO_PION; break;
-			default: 	m_pConsole->setColor(COLOR_BLUE, COLOR_RED); 	std::cout << LOGO_VIDE; break;
-			}
+			this->mettreEnSurbrillance(x, y, COLOR_RED);
 
 		}
 	}while(bouton != BUTTON_ENTER); // Tant que l'on a pas appuyé sur Enter

@@ -29,6 +29,6 @@
 #define BUTTON_ESC 		27
 
 // Arbre de l'algorithme MinMax
-#define PROFONDEUR 5
+#define PROFONDEUR 8
 
 #endif // CONFIG_H_INCLUDED

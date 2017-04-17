@@ -30,6 +30,7 @@ public:
 
 	void afficherTablier(); // On affiche le tablier
 	void afficherMessage(std::string message); // On affiche un message sur le côté
+	void mettreEnSurbrillance(int x, int y, Color c); // Met en surbrillance une case
 
 	void selectionCase(int &x, int &y); // On retourne les coordonnées X et Y d'une case choisie par l'utilisateur
 	void trouverVainqueur(); // Affiche les scores et le vainqueur

@@ -23,7 +23,24 @@ Arbre::~Arbre()
 // Methodes
 void Arbre::trouverMeilleurCoup(int &xDonne, int &yDonne)
 {
-	/// Traitement: Etape 1: tracer l'arbre
+	/// Traitement:
+	this->tracerArbre();
+	this->remonterArbre();
+
+	// On choisit au niveau de profondeur 1 quel coup jouer
+	for(auto elem : m_tabNoeuds[1]) // Le maximum ayant déjà été déterminé, on regarde à quel X/Y joué il correspond
+	{
+		if(elem->m_meilleurNombreDePion == elem->m_antecedent->m_meilleurNombreDePion) {
+			xDonne = elem->m_x;
+			yDonne = elem->m_y;
+			return;
+		}
+	}
+}
+
+void Arbre::tracerArbre()
+{
+	/// Traitement
 	// Initialisation du niveau de profondeur 0
 	m_tabNoeuds[0].push_back(&m_firstNoeud);
 
@@ -42,27 +59,20 @@ void Arbre::trouverMeilleurCoup(int &xDonne, int &yDonne)
 			}
 		}
 	}
+}
 
-	/// Traitement: Etape 2: remonter l'arbre du dernier niveau jusqu'au 1er
+void Arbre::remonterArbre()
+{
+	/// Traitement
 	for(int profondeur = PROFONDEUR-1; profondeur > 0; profondeur--)
 	{
 		for(auto elem : m_tabNoeuds[profondeur])
 		{
-			if((elem->m_profondeur % 2 == 0) && (elem->m_meilleurNombreDePion < elem->m_antecedent->m_meilleurNombreDePion)) // m_meilleurNombreDePion prend la valeur minimum
+			if((elem->m_antecedent->m_tab.m_tourDeJouer == NOIR)	&& (elem->m_meilleurNombreDePion < elem->m_antecedent->m_meilleurNombreDePion)) // m_meilleurNombreDePion prend la valeur minimum si pion précédent est noir (joueur)
 				elem->m_antecedent->m_meilleurNombreDePion = elem->m_meilleurNombreDePion;
 
-			if((elem->m_profondeur % 2 == 1) && (elem->m_meilleurNombreDePion > elem->m_antecedent->m_meilleurNombreDePion)) // m_meilleurNombreDePion prend la valeur maximum
+			if((elem->m_antecedent->m_tab.m_tourDeJouer == BLANC)	&& (elem->m_meilleurNombreDePion > elem->m_antecedent->m_meilleurNombreDePion)) // m_meilleurNombreDePion prend la valeur maximum si pion précédent est blanc (joueur)
 				elem->m_antecedent->m_meilleurNombreDePion = elem->m_meilleurNombreDePion;
-		}
-	}
-
-	/// Traitement: Etape 3: on choisit au niveau de profondeur 1 quel coup jouer
-	for(auto elem : m_tabNoeuds[1]) // Le maximum ayant déjà été déterminé, on regarde à quel X/Y joué il correspond
-	{
-		if(elem->m_meilleurNombreDePion == elem->m_antecedent->m_meilleurNombreDePion) {
-			xDonne = elem->m_x;
-			yDonne = elem->m_y;
-			return;
 		}
 	}
 }

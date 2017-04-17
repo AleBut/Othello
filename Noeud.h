@@ -9,11 +9,9 @@ class Noeud
 {
 public:
 	Noeud * m_antecedent; // Noeud précédent
-	std::vector<Noeud *> m_successeur;
 	Tablier m_tab;
 
 	int m_x, m_y; // Coo du pion joué
-	int m_profondeur; // Profondeur: impaire => Le joueur adverse joue, paire => L'IA joue
 	int m_meilleurNombreDePion; // Permet de comparer la meilleure "option" de jouer rapportant le plus de point
 
 
