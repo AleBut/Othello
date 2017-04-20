@@ -5,6 +5,8 @@
 
 #include "Game.h"
 #include "Arbre.h"
+#include "GraphicAllegro.h"
+
 
 
 // /!\ PATCH A LA FONCTION DE CONVERSION INT à STRING
@@ -64,6 +66,7 @@ void Game::menu()
 			choix = m_pConsole->getInputKey();
 	}
 
+	system("cls");
 	switch(choix)
 	{
 		case '1' : m_tablier.reinitialiserTablier(); 	break; // On re-initialise le tablier en tablier d'origine
@@ -86,6 +89,7 @@ void Game::menu()
 	}
 
 	// Evenement à déclencher
+	system("cls");
 	switch(choix)
 	{
 		case '1': this->modeJoueurVJoueur(); 	break; // Joueur VS Joueur
@@ -232,6 +236,9 @@ void Game::IAMinMaxJoue()
 
 void Game::afficherTablier()
 {
+	if(GRAPH) {graphique::afficherTablier(m_tablier); return; }
+
+	/// Traitement
 	m_pConsole->setColor(COLOR_BLACK, COLOR_GRAY); // On remet la couleur d'origine (précaution)
 	system("cls");
 
@@ -254,12 +261,18 @@ void Game::afficherTablier()
 
 void Game::afficherMessage(std::string message)
 {
+	if(GRAPH) {graphique::afficherMessage(message); return; }
+
+	/// Traitement
     m_pConsole->gotoLigCol(XMSG, YMSG);
     std::cout << message;
 }
 
 void Game::mettreEnSurbrillance(int x, int y, Color c)
 {
+	if(GRAPH) {return; }
+
+	/// Traitement
 	m_pConsole->gotoLigCol((X0 + x*ESPACEMENT_X), (Y0+ y*ESPACEMENT_Y));
 	switch(m_tablier.m_tab[x][y])
 	{
@@ -272,6 +285,8 @@ void Game::mettreEnSurbrillance(int x, int y, Color c)
 
 void Game::selectionCase(int &x, int &y)
 {
+	if(GRAPH) {graphique::selectionCase(x, y); return; }
+
 	/// Données
 	int bouton = 0, dx, dy; // Bouton recevant la valeur de la touche pressée, déplacement en X et Y
 
@@ -327,11 +342,11 @@ void Game::trouverVainqueur()
 	std::string phraseAnnonce;
 
 	/// Traitement
-	if(compteurBlanc > compteurNoir) phraseAnnonce = "Les blancs remportent la partie!"; // Choix du message à afficher
-	if(compteurBlanc < compteurNoir) phraseAnnonce = "Les noirs remportent la partie!";
+	if(compteurBlanc > compteurNoir) phraseAnnonce = "Les blancs gagnent!"; // Choix du message à afficher
+	if(compteurBlanc < compteurNoir) phraseAnnonce = "Les noirs gagnent!";
 	if(compteurBlanc == compteurNoir) phraseAnnonce = "Match nul!";
 
-	phraseAnnonce += " Score: " + patch::to_string(compteurBlanc) + "-" + patch::to_string(compteurNoir); // Score en plus
+	phraseAnnonce += " " + patch::to_string(compteurBlanc) + "-" + patch::to_string(compteurNoir); // Score en plus
 
 	this->afficherMessage(phraseAnnonce);
 }

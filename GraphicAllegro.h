@@ -14,8 +14,6 @@ namespace graphique
 	void afficherMessage(std::string message);
 
 	void selectionCase(int &x, int &y);
-
-	void surprise();
 }
 
 #endif // GRAPHICALLEGRO_H_INCLUDED

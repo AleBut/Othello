@@ -2,7 +2,6 @@
 #include "Config.h"
 
 #include <allegro.h>
-#include <stdlib.h> // RANDOM
 
 
 void graphique::demarer_allegro()
@@ -67,20 +66,20 @@ void graphique::afficherMessage(std::string message)
 
 void graphique::selectionCase(int &x, int &y)
 {
-	/// Données
+	// Données
 	int click, xClick, yClick;
 
-	/// Traitement
+	// Traitement
 	while(1)
 	{
 		if(mouse_b&1) {
 				click++;
 				// En cas de clic
 				if(click == 1) {
-					xClick = mouse_x; // On récupère les coordonnées en pixel
+					xClick = mouse_x;
 					yClick = mouse_y;
 
-					x = (xClick - (xClick%PION_TAILLE))/PION_TAILLE; // Conversion en numéro de case
+					x = (xClick - (xClick%PION_TAILLE))/PION_TAILLE;
 					y = (yClick - (yClick%PION_TAILLE))/PION_TAILLE;
 
 					if((x >= 0) && (x < TAB_TAILLE) && (y >= 0) && (y < TAB_TAILLE))
@@ -89,57 +88,5 @@ void graphique::selectionCase(int &x, int &y)
 		}
 		else
 			click = 0;
-	}
-}
-
-void graphique::surprise()
-{
-	/// Données
-	BITMAP * BG, * BOJ, * PIOR;
-	SAMPLE * STAR;
-	int xB = SCREEN_W/3, yB = SCREEN_H/2, dxB = -2, dyB = 1;
-	int xP = (2*SCREEN_W)/3, yP = SCREEN_H/2, dxP = 1, dyP = -1;
-
-	int newX, newY;
-
-	BOJ	= load_bitmap("images/benja.bmp",NULL);
-	PIOR= load_bitmap("images/piair.bmp",NULL);
-
-	STAR=load_sample("images/star.wav");
-	play_sample(STAR, 155, 128, 1000, 0);
-
-	while(1)
-	{
-		newX = xB + dxB;
-		newY = yB + dyB;
-		if((newX > 0) && (newX + 39 < SCREEN_W))	xB = newX;
-		else dxB = -dxB;
-		if((newY > 0) && (newY + 150 < SCREEN_H))	yB = newY;
-		else dyB = -dyB;
-
-		newX = xP + dxP;
-		newY = yP + dyP;
-		if((newX > 0) && (newX + 125 < SCREEN_W))	xP = newX;
-		else dxP = -dxP;
-		if((newY > 0) && (newY + 100 < SCREEN_H))	yP = newY;
-		else dyP = -dyP;
-
-		dyB += (rand() %3) - 1;
-		dxB += (rand() %3) - 1;
-
-		dyP += (rand() %3) - 1;
-		dxP += (rand() %3) - 1;
-
-		if((dyB > SCREEN_H/2) || (dyB < -SCREEN_H/2)) dyB = 0;
-		if((dxB > SCREEN_W/2) || (dxB < -SCREEN_W/2)) dxB = 0;
-
-		if((dyP > SCREEN_H/2) || (dyP < -SCREEN_H/2)) dyP = 0;
-		if((dxP > SCREEN_W/2) || (dxP < -SCREEN_W/2)) dxP = 0;
-
-
-		BG	= load_bitmap("images/background.bmp",NULL);
-		rotate_sprite(BG, BOJ, xB, yB, 0);
-		rotate_sprite(BG, PIOR, xP, yP, 0);
-		blit(BG,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 	}
 }
