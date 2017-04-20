@@ -30,9 +30,22 @@ public:
 
 	void afficherTablier(); // On affiche le tablier
 	void afficherMessage(std::string message); // On affiche un message sur le côté
+	void selectionCase(int &x, int &y); // On retourne les coordonnées X et Y d'une case choisie par l'utilisateur
 	void mettreEnSurbrillance(int x, int y, Color c); // Met en surbrillance une case
 
-	void selectionCase(int &x, int &y); // On retourne les coordonnées X et Y d'une case choisie par l'utilisateur
+	/// CONSOLE
+	void afficherTablierConsole(); // On affiche le tablier
+	void afficherMessageConsole(std::string message); // On affiche un message sur le côté
+	void selectionCaseConsole(int &x, int &y); // On retourne les coordonnées X et Y d'une case choisie par l'utilisateur
+	void mettreEnSurbrillanceConsole(int x, int y, Color c); // Met en surbrillance une case
+
+	/// GRAPHIQUE
+	void afficherTablierGraphique();
+	void afficherMessageGraphique(std::string message);
+	void selectionCaseGraphique(int &x, int &y);
+	void mettreEnSurbrillanceGraphique(int x, int y, Color c);
+
+
 	void trouverVainqueur(); // Affiche les scores et le vainqueur
 };
 

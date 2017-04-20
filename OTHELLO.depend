@@ -33,27 +33,30 @@
 1491132067 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\console.h
 	<iostream>
 
-1492171362 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\main.cpp
+1492359308 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\main.cpp
+	<allegro.h>
 	"Game.h"
+	"GraphicAllegro.h"
 
-1492251842 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\game.h
+1492358134 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\game.h
 	"Tablier.h"
 	"console.h"
 
-1492255593 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\config.h
+1492359395 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\config.h
 
-1492251133 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\tablier.h
+1492294061 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\tablier.h
 	"Config.h"
 
-1492252793 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\game.cpp
+1492359329 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\game.cpp
 	<stdlib.h>
 	<sstream>
 	<iostream>
 	<Windows.h>
 	"Game.h"
 	"Arbre.h"
+	"GraphicAllegro.h"
 
-1492252509 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\tablier.cpp
+1492294061 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\tablier.cpp
 	"Tablier.h"
 	<fstream>
 	<string>
@@ -108,49 +111,70 @@
 1492251133 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\arbre.h
 	"Noeud.h"
 
-1492251133 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\arbre.cpp
+1492359373 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\graphicallegro.cpp
+	"GraphicAllegro.h"
+	"Config.h"
+	<allegro.h>
+
+1492359308 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - développement alexis\graphicallegro.h
+	<string>
+	"Tablier.h"
+
+1492251133 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\arbre.cpp
 	"Arbre.h"
 	<iostream>
 
-1492251133 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\arbre.h
+1492251133 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\arbre.h
 	"Noeud.h"
 
-1492253210 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\noeud.h
+1492253210 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\noeud.h
 	<vector>
 	"Tablier.h"
 
-1492251133 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\tablier.h
+1492294061 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\tablier.h
 	"Config.h"
 
-1492268521 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\config.h
+1492359395 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\config.h
 
-1491131546 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\console.cpp
+1491131546 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\console.cpp
 	"console.h"
 	<conio.h>
 	<windows.h>
 
-1491132067 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\console.h
+1491132067 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\console.h
 	<iostream>
 
-1492252793 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\game.cpp
+1492359329 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\game.cpp
 	<stdlib.h>
 	<sstream>
 	<iostream>
 	<Windows.h>
 	"Game.h"
 	"Arbre.h"
+	"GraphicAllegro.h"
 
-1492251842 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\game.h
+1492358134 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\game.h
 	"Tablier.h"
 	"console.h"
 
-1492171362 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\main.cpp
-	"Game.h"
+1492359308 c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\graphicallegro.h
+	<string>
+	"Tablier.h"
 
-1492253210 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\noeud.cpp
+1492359563 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\graphicallegro.cpp
+	"GraphicAllegro.h"
+	"Config.h"
+	<allegro.h>
+
+1492359563 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\main.cpp
+	<allegro.h>
+	"Game.h"
+	"GraphicAllegro.h"
+
+1492253210 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\noeud.cpp
 	"Noeud.h"
 
-1492252509 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 3.5\tablier.cpp
+1492294061 source:c:\users\alex1_000\dropbox\projet de alexis et ses drôles de dame\othello - 4.0\tablier.cpp
 	"Tablier.h"
 	<fstream>
 	<string>

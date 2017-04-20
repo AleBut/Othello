@@ -37,6 +37,8 @@
 		<Unit filename="Config.h" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.h" />
+		<Unit filename="GraphicAllegro.cpp" />
+		<Unit filename="GraphicAllegro.h" />
 		<Unit filename="Noeud.cpp" />
 		<Unit filename="Noeud.h" />
 		<Unit filename="Tablier.cpp" />

@@ -1,7 +1,6 @@
 #ifndef TABLIER_H_INCLUDED
 #define TABLIER_H_INCLUDED
 
-
 #include "Config.h"
 
 class Tablier
@@ -10,7 +9,6 @@ class Tablier
 		int m_nombreDePions; // Nombre de pion totale
 		char m_tab[TAB_TAILLE][TAB_TAILLE]; // Tablier
 		char m_tourDeJouer; // Quel joueur doit jouer?
-
 
 		// Constructeur & Destructeur
 		Tablier();
