@@ -1,5 +1,10 @@
+/*!
+* \file Game.cpp
+* \brief Description de la classe Game
+*/
+
 #include <stdlib.h> // Clear console & random
-#include <sstream> // Nécessaire pour le patch
+#include <sstream> // Necessaire pour le patch
 #include <iostream> // I/O
 #include <Windows.h> // Pour la fonction Sleep
 
@@ -9,7 +14,7 @@
 
 
 
-// /!\ PATCH A LA FONCTION DE CONVERSION INT à STRING
+// /!\ PATCH A LA FONCTION DE CONVERSION INT a STRING
 namespace patch
 {
     template < typename T > std::string to_string( const T& n )
@@ -21,36 +26,36 @@ namespace patch
 }
 
 
-// Constructeur & Destructeur
+/// Constructeur & Destructeur
 Game::Game()
 	:m_pConsole(Console::getInstance())
 {
+	system ("mode con cols=70 lines=30000");
 	system("cls");
 	system("color 80");
 }
 
 Game::~Game()
 {
-	m_pConsole->setColor(COLOR_BLACK, COLOR_GRAY); // On remet la couleur d'origine (précaution)
+	m_pConsole->setColor(COLOR_BLACK, COLOR_GRAY); // On remet la couleur d'origine (precaution)
 	m_pConsole->gotoLigCol(0, (Y0+ TAB_TAILLE*ESPACEMENT_Y));
 
-	// On libère la mémoire
+	// On libere la memoire
 	m_pConsole->deleteInstance();
 }
 
-// Methodes
+/// Methodes
 void Game::lancerJeux()
 {
-	/// Traitement à  compléter plus tard pour revenir au menu, ou checker quand le jeux est terminé
+	/// Traitement a  completer plus tard pour revenir au menu, ou checker quand le jeux est termine
 	this->menu();
-
 
 	while(!(m_pConsole->getInputKey())) {} // Tant que l'on ne presse pas une touche
 }
 
 void Game::menu()
 {
-	/// Données
+	/// Donnees
 	int choix = 0;
 
 	/// Traitement
@@ -70,7 +75,7 @@ void Game::menu()
 	switch(choix)
 	{
 		case '1' : m_tablier.reinitialiserTablier(); 	break; // On re-initialise le tablier en tablier d'origine
-		case '2' : m_tablier.chargerTablier(); 			break; // On charge les données d'une save
+		case '2' : m_tablier.chargerTablier(); 			break; // On charge les donnees d'une save
 	}
 
 	choix = 0;
@@ -88,7 +93,7 @@ void Game::menu()
 			choix = m_pConsole->getInputKey();
 	}
 
-	// Evenement à déclencher
+	// Evenement a declencher
 	system("cls");
 	switch(choix)
 	{
@@ -97,6 +102,23 @@ void Game::menu()
 		case '3': this->modeIAMinMaxVJoueur();	break; // IA MinMax VS Joueur
 		default: 								break;// Ici on se casse
 	}
+}
+
+void Game::trouverVainqueur()
+{
+	/// Donnees
+	int compteurBlanc = m_tablier.nombreDePion(BLANC);
+	int compteurNoir = m_tablier.nombreDePion(NOIR);
+	std::string phraseAnnonce;
+
+	/// Traitement
+	if(compteurBlanc > compteurNoir) phraseAnnonce = "Les blancs gagnent!"; // Choix du message a afficher
+	if(compteurBlanc < compteurNoir) phraseAnnonce = "Les noirs gagnent!";
+	if(compteurBlanc == compteurNoir) phraseAnnonce = "Match nul!";
+
+	phraseAnnonce += " " + patch::to_string(compteurBlanc) + "-" + patch::to_string(compteurNoir); // Score en plus
+
+	this->afficherMessage(phraseAnnonce);
 }
 
 void Game::modeJoueurVJoueur()
@@ -112,10 +134,10 @@ void Game::modeJoueurVJoueur()
 			this->afficherMessage("Les blancs doivent jouer");
 
 		this->joueurJoue(); // On joue un pion
-		m_tablier.avancerTour(); // On donne aux pions opposés le droit de jouer
+		m_tablier.avancerTour(); // On donne aux pions opposes le droit de jouer
 	}
 
-	this->afficherTablier(); // Petit re-affichage pour actualiser la dernière pose de pion
+	this->afficherTablier(); // Petit re-affichage pour actualiser la derniere pose de pion
 	this->trouverVainqueur(); // On trouve le vainqueur
 }
 
@@ -135,7 +157,7 @@ void Game::modeIARVJoueur()
 			this->IARJoue(); // L'IA joue
 		}
 		this->afficherTablier(); // Affichage du tablier
-		m_tablier.avancerTour(); // On donne aux pions opposés le droit de jouer
+		m_tablier.avancerTour(); // On donne aux pions opposes le droit de jouer
 	}
 
 	this->trouverVainqueur(); // On trouve le vainqueur
@@ -157,7 +179,7 @@ void Game::modeIAMinMaxVJoueur()
 			this->IAMinMaxJoue(); // L'IA joue
 		}
 		this->afficherTablier(); // Affichage du tablier
-		m_tablier.avancerTour(); // On donne aux pions opposés le droit de jouer
+		m_tablier.avancerTour(); // On donne aux pions opposes le droit de jouer
 	}
 
 	this->trouverVainqueur(); // On trouve le vainqueur
@@ -167,24 +189,25 @@ void Game::modeIAMinMaxVJoueur()
 
 void Game::joueurJoue()
 {
-	/// Données
+	/// Donnees
 	int xSelect = 0, ySelect = 0;
 
 	/// Traitement
 	do
 	{
-		// On sélectionne une case à l'aide des boutons z, d, s, q, et ENTER pour valider
+		// On selectionne une case a l'aide des boutons z, d, s, q, et ENTER pour valider
 		this->selectionCase(xSelect, ySelect);
 
 	} while(!(m_tablier.selectionValide(xSelect, ySelect))); // Tant que la case n'est pas un choix valide
 
-	m_tablier.poserPion(xSelect, ySelect); // On pose le pion et remplace les pions ennemis aux alentours si nécessaire
+	m_tablier.poserPion(xSelect, ySelect); // On pose le pion et remplace les pions ennemis aux alentours si necessaire
 }
 
 void Game::IARJoue()
 {
-	/// Données
+	/// Donnees
 	int numeroPionSelectionne = 0, nombreDeCoupsPossibles = 0;
+	Arbre A(m_tablier, 2);
 
 	/// Traitement
 		// Nombre de coups possibles
@@ -196,7 +219,7 @@ void Game::IARJoue()
 				nombreDeCoupsPossibles++;
 		}
 	}
-		// Sélection du numéro du coup choisit
+		// Selection du numero du coup choisit
 		numeroPionSelectionne = (rand() % nombreDeCoupsPossibles) +1;
 		nombreDeCoupsPossibles = 0;
 
@@ -210,8 +233,14 @@ void Game::IARJoue()
 
 				if(nombreDeCoupsPossibles == numeroPionSelectionne) {
 					m_tablier.poserPion(x, y);
-					this->mettreEnSurbrillance(x, y, COLOR_GREEN); // On met en surbrillance le coup joué pour aider le spectateur
-					Sleep(1000); // Délai car l'IA joue instantanément ici
+
+					this->mettreEnSurbrillance(x, y, COLOR_GREEN); // On met en surbrillance le coup joue pour aider le spectateur
+
+					if(ARBRE) { A.tracerArbre(); A.dessinerConsole();} // Si le mode Arbre de recherche est active
+
+					if(!GRAPH && ARBRE) while(!(m_pConsole->getInputKey())) {} // Si on est en mode console avec l'arbre a dessiner, on doit presser une touche pour sortir
+					else Sleep(1000);
+
 					return;
 				}
 			}
@@ -221,15 +250,20 @@ void Game::IARJoue()
 
 void Game::IAMinMaxJoue()
 {
-	/// Données
+	/// Donnees
 	Arbre A(m_tablier);
 	int x, y;
 
 	/// Traitement
 	A.trouverMeilleurCoup(x, y);
 	m_tablier.poserPion(x, y);
+
 	this->mettreEnSurbrillance(x, y, COLOR_GREEN);
-	Sleep(1000); // Délai car l'IA joue instantanément
+
+	if(ARBRE) A.dessinerConsole(); // Si le mode Arbre de recherche est active
+
+	if(!GRAPH && ARBRE) while(!(m_pConsole->getInputKey())) {} // Si on est en mode console avec l'arbre a dessiner, on doit presser une touche pour sortir
+	else Sleep(1000);
 }
 
 
@@ -239,7 +273,7 @@ void Game::afficherTablier()
 	if(GRAPH) {graphique::afficherTablier(m_tablier); return; }
 
 	/// Traitement
-	m_pConsole->setColor(COLOR_BLACK, COLOR_GRAY); // On remet la couleur d'origine (précaution)
+	m_pConsole->setColor(COLOR_BLACK); // On remet la couleur d'origine (precaution)
 	system("cls");
 
 	for(int y=0; y<TAB_TAILLE; y++)
@@ -250,13 +284,13 @@ void Game::afficherTablier()
 
 			switch(m_tablier.m_tab[x][y])
 			{
-			case NOIR:	m_pConsole->setColor(COLOR_BLACK, COLOR_GRAY);	std::cout << LOGO_PION; break;
-			case BLANC:	m_pConsole->setColor(COLOR_WHITE, COLOR_GRAY);	std::cout << LOGO_PION;	break;
-			default:	m_pConsole->setColor(COLOR_BLUE, COLOR_GRAY);	std::cout << LOGO_VIDE;	break;
+			case NOIR:	m_pConsole->setColor(COLOR_BLACK);	std::cout << LOGO_PION; break;
+			case BLANC:	m_pConsole->setColor(COLOR_WHITE);	std::cout << LOGO_PION;	break;
+			default:	m_pConsole->setColor(COLOR_BLUE);	std::cout << LOGO_VIDE;	break;
 			}
 		}
 	}
-	m_pConsole->setColor(COLOR_BLACK, COLOR_GRAY); // On remet la couleur d'origine (précaution)
+	m_pConsole->setColor(COLOR_BLACK); // On remet la couleur d'origine (precaution)
 }
 
 void Game::afficherMessage(std::string message)
@@ -280,27 +314,27 @@ void Game::mettreEnSurbrillance(int x, int y, Color c)
 		case BLANC: m_pConsole->setColor(COLOR_WHITE, c); 	std::cout << LOGO_PION; break;
 		default: 	m_pConsole->setColor(COLOR_BLUE, c); 	std::cout << LOGO_VIDE; break;
 	}
+	m_pConsole->setColor(COLOR_BLACK);
 }
-
 
 void Game::selectionCase(int &x, int &y)
 {
 	if(GRAPH) {graphique::selectionCase(x, y); return; }
 
-	/// Données
-	int bouton = 0, dx, dy; // Bouton recevant la valeur de la touche pressée, déplacement en X et Y
+	/// Donnees
+	int bouton = 0, dx, dy; // Bouton recevant la valeur de la touche pressee, deplacement en X et Y
 
 	/// Traitement
 
-	// On colorie la 1ère case [0][0] pour montrer la position initiale du curseur
+	// On colorie la 1ere case [0][0] pour montrer la position initiale du curseur
 	this->mettreEnSurbrillance(x, y, COLOR_RED);
 
 	do
 	{
-		if(m_pConsole->isKeyboardPressed()) { // Si une touche est pressée
+		if(m_pConsole->isKeyboardPressed()) { // Si une touche est pressee
 			bouton = m_pConsole->getInputKey(); // On actualise la valeur de Bout
 
-			// On re-calcule les valeurs de Dx et Dy en fonction de cette dernière
+			// On re-calcule les valeurs de Dx et Dy en fonction de cette derniere
 			switch(bouton)
 			{
 				case 'z':	dx = 0; 	dy = -1; 	break;
@@ -312,13 +346,13 @@ void Game::selectionCase(int &x, int &y)
 				default: 	dx = 0; 	dy = 0; 	break;
 			}
 
-			// Blindage pour ne pas dépasser le tableau
+			// Blindage pour ne pas depasser le tableau
 			if((x + dx) > (TAB_TAILLE - 1) || (x + dx) < 0)
 				dx = 0;
 			if((y + dy) > (TAB_TAILLE - 1) || (y + dy) < 0)
 				dy = 0;
 
-			// On regrise l'arrière plan (utiliser la fonction afficher utilise ressources) du curseur précédent
+			// On regrise l'arriere plan (utiliser la fonction afficher utilise ressources) du curseur precedent
 			this->mettreEnSurbrillance(x, y, COLOR_GRAY);
 
 			// Calcul de la nouvelle position
@@ -329,24 +363,5 @@ void Game::selectionCase(int &x, int &y)
 			this->mettreEnSurbrillance(x, y, COLOR_RED);
 
 		}
-	}while(bouton != BUTTON_ENTER); // Tant que l'on a pas appuyé sur Enter
-
-	m_pConsole->setColor(COLOR_BLACK, COLOR_GRAY);
-}
-
-void Game::trouverVainqueur()
-{
-	/// Données
-	int compteurBlanc = m_tablier.nombreDePion(BLANC);
-	int compteurNoir = m_tablier.nombreDePion(NOIR);
-	std::string phraseAnnonce;
-
-	/// Traitement
-	if(compteurBlanc > compteurNoir) phraseAnnonce = "Les blancs gagnent!"; // Choix du message à afficher
-	if(compteurBlanc < compteurNoir) phraseAnnonce = "Les noirs gagnent!";
-	if(compteurBlanc == compteurNoir) phraseAnnonce = "Match nul!";
-
-	phraseAnnonce += " " + patch::to_string(compteurBlanc) + "-" + patch::to_string(compteurNoir); // Score en plus
-
-	this->afficherMessage(phraseAnnonce);
+	}while(bouton != BUTTON_ENTER); // Tant que l'on a pas appuye sur Enter
 }

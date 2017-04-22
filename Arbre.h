@@ -1,25 +1,73 @@
 #ifndef ARBRE_H_INCLUDED
 #define ARBRE_H_INCLUDED
-#include "console.h"
+
+/*!
+* \file Arbre.h
+* \brief Contient la classe Arbre
+*/
+
 #include "Noeud.h"
 
+
+/*! \class Arbre
+* \brief Classe generant le trace de l'arbre MinMax et l'exploitant pour obtenir le meilleur coup
+*/
 class Arbre
 {
 private:
-    Console * m_pConsole; // Pointeur sur l'instance console
-	Noeud m_firstNoeud; // Noeud de départ de l'arbre, étant l'échequier actuel
-	std::vector<Noeud  *> m_tabNoeuds[PROFONDEUR]; // Tableau stockant les pointeurs sur les noeuds par niveau de profondeur les noeuds par niveau de profondeur
+	int m_profondeur; /*!< Profondeur de l'arbre */
+	Noeud m_firstNoeud; /*!< Noeud de depart de l'arbre, etant l'echequier actuel */
+	std::vector<Noeud  *> m_tabNoeuds[PROFONDEUR]; /*!< Tableau stockant les pointeurs sur les noeuds par niveau de profondeur */
 
 public:
-	// Constructeur & Destructeur
-	Arbre(Tablier _tab);
+	/*!
+	* \brief Constructeur
+	*
+	* Constuit un arbre a partir du tablier du jeux actuel
+	*
+	* \param _tab : Tablier (tablier de jeux actuel)
+	*\param _profondeur : int (profondeur de l'arbre)
+	*/
+	Arbre(Tablier _tab, int _profondeur = PROFONDEUR);
+
+	/*!
+	* \brief Destructeur
+	*
+	* Destructeur de la classe Arbre
+	*/
 	~Arbre();
 
-	// Methodes
-	void trouverMeilleurCoup(int &x, int &y); // Trouve en fonction de la profondeur le meilleur coup que la machine peut jouer
-	void tracerArbre(); // On trace toute les possibilités
-	void remonterArbre(); // On remonte l'arbre des racines en sélectionnant le Min ou Max
-	void Dessin(); // on dessine l'arbre
+public:
+	/*!
+	* \brief Retourne le meilleur coup a jouer
+	*
+	* Retourne les coordonnees d'une case X & Y etant consideree sur plusieurs tour comme le meilleur coup
+	*
+	* \param x : reference sur un int (coordonnee en x)
+	* \param y : reference sur un int (coordonnee en y)
+	*/
+	void trouverMeilleurCoup(int &x, int &y);
+
+	/*!
+	* \brief Trace l'arbre
+	*
+	* On trace toute les possibilites possibles sur une certaine profondeur
+	*/
+	void tracerArbre();
+
+	/*!
+	* \brief On remonte l'arbre
+	*
+	* On remonte l'arbre des racines en selectionnant le Min ou Max
+	*/
+	void remonterArbre();
+
+	/*!
+	* \brief On dessine l'arbre dans la console
+	*
+	* On dessine l'arbre de l'algorithme MinMax ou de l'IA Random dans toute son integralite
+	*/
+	void dessinerConsole();
 };
 
 #endif // ARBRE_H_INCLUDED
