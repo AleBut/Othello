@@ -1,3 +1,8 @@
+/*!
+* \file main.cpp
+* \brief Contient l'execution du programme
+*/
+
 #include <allegro.h>
 
 #include "Game.h"

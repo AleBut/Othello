@@ -1,3 +1,8 @@
+/*!
+* \file Console.cpp
+* \brief Contient la description de la classe Console
+*/
+
 #include "console.h"
 #include <conio.h>
 #include <windows.h>
@@ -75,4 +80,26 @@ void Console::_setColor(int back, int front)
 void Console::setColor(Color ecriture, Color arriere)
 {
 	this->_setColor(ecriture, arriere);
+}
+
+
+Color Console::nextColor(Color couleur)
+{
+    if(couleur == COLOR_WHITE)
+		return COLOR_RED;
+
+    if(couleur == COLOR_RED)
+		return COLOR_GREEN;
+
+    if(couleur == COLOR_GREEN)
+		return COLOR_BLUE;
+
+    if(couleur == COLOR_BLUE)
+		return COLOR_YELLOW;
+
+    if(couleur == COLOR_YELLOW)
+		return COLOR_PURPLE;
+
+	if(couleur == COLOR_PURPLE)
+		return COLOR_WHITE;
 }

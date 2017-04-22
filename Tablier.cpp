@@ -1,20 +1,24 @@
+/*!
+* \file Tablier.cpp
+* \brief Description de la classe Tablier
+*/
+
 #include "Tablier.h"
 
 #include <fstream> // Dossiers
-#include <string> // Concaténation des strings
+#include <string> // Concatenation des strings
 #include <iostream> // I/O
 
 
 /// Constructeur & destructeurs
 Tablier::Tablier()
-		:m_nombreDePions(NBRE_PIONS), m_tourDeJouer(NOIR)
+		: m_tourDeJouer(NOIR)
 {
 	// Nothing
 }
 
-
 Tablier::Tablier(Tablier const& copy)
-		:m_nombreDePions(copy.m_nombreDePions), m_tourDeJouer(copy.m_tourDeJouer)
+		:m_tourDeJouer(copy.m_tourDeJouer)
 {
 	for(int y=0; y<TAB_TAILLE; y++)
 	{
@@ -31,7 +35,7 @@ Tablier::~Tablier()
 }
 
 
-/// Méthodes
+/// Methodes
 void Tablier::reinitialiserTablier()
 {
 	// Remplissage tableau
@@ -55,23 +59,23 @@ void Tablier::reinitialiserTablier()
 
 void Tablier::chargerTablier()
 {
-	/// Données
-	std::string ligne; // Ligne servant à lire les données
+	/// Donnees
+	std::string ligne; // Ligne servant a lire les donnees
 
 	/// Traitement
 	std::ifstream fichier(SAVEFILE, std::ios::in); // Ouverture du fichier
 
-	if(!fichier) { // Vérification
+	if(!fichier) { // Verification
 		std::cout << "Erreur ouverture fichier: " << SAVEFILE << std::endl;
 		return;
 	}
 
-	getline(fichier, ligne); // On récupère la ligne
-	m_tourDeJouer = ligne[0]; // Cette ligne ne comportant qu'une lettre, déterminant qui joue à ce moment précis
+	getline(fichier, ligne); // On recupere la ligne
+	m_tourDeJouer = ligne[0]; // Cette ligne ne comportant qu'une lettre, determinant qui joue a ce moment precis
 
 	for(int y=0; y<TAB_TAILLE; y++)
 	{
-		getline(fichier, ligne); // On récupère la ligne
+		getline(fichier, ligne); // On recupere la ligne
 
 		for(int x=0; x<TAB_TAILLE; x++)
 		{
@@ -82,17 +86,17 @@ void Tablier::chargerTablier()
 	fichier.close();  // on ferme le fichier
 }
 
-void Tablier::sauvegarderTablier() //!\\ Changer plus tard le "text.txt" en SAVEFILE
+void Tablier::sauvegarderTablier()
 {
 	/// Traitement
-	std::ofstream fichier("test.txt", std::ios::out | std::ios::trunc);// Ouverture en écriture et effacage
+	std::ofstream fichier(SAVEFILE, std::ios::out | std::ios::trunc);// Ouverture en ecriture et effacage
 
-	if(!fichier) { // Vérification
+	if(!fichier) { // Verification
 	std::cout << "Erreur ouverture fichier: " << SAVEFILE << std::endl;
 	return;
 	}
 
-	fichier << m_tourDeJouer << std::endl; // On écrit d'abord qui doit jouer à ce tour là
+	fichier << m_tourDeJouer << std::endl; // On ecrit d'abord qui doit jouer a ce tour la
 
 	for(int y=0; y<TAB_TAILLE; y++)
 	{
@@ -126,7 +130,7 @@ bool Tablier::selectionValide(int x, int y)
 	if(this->voisinageRecursive(x, y, 1, 1))	return true; // Bas-droite
 
 
-	// Si aucune des conditions précédentes n'a retourné vraie
+	// Si aucune des conditions precedentes n'a retourne vraie
 	return false;
 }
 
@@ -144,7 +148,7 @@ void Tablier::poserPion(int x, int y)
 	if(this->voisinageRecursive(x, y, 0, 1))	this->retournerPionsRecursive(x, y, 0, 1); 		// Bas
 	if(this->voisinageRecursive(x, y, 1, 1))	this->retournerPionsRecursive(x, y, 1, 1); 		// Bas-droite
 
-	// Pion à l'endroit souhaité
+	// Pion a l'endroit souhaite
 	m_tab[x][y] = m_tourDeJouer;
 }
 
@@ -158,34 +162,34 @@ bool Tablier::caseLibre(int x, int y)
 
 bool Tablier::voisinageRecursive(int x, int y, int dx, int dy)
 {
-	/// Données
+	/// Donnees
 	int newX = x + dx, newY = y+ dy;
 
 	/// Traitement
-	if((newX >= TAB_TAILLE ) || (newX < 0 ) || (newY >= TAB_TAILLE ) || (newY < 0 )) // Si on a dépassé le tableau
+	if((newX >= TAB_TAILLE ) || (newX < 0 ) || (newY >= TAB_TAILLE ) || (newY < 0 )) // Si on a depasse le tableau
 		return false;
 
 	if(this->caseLibre(newX, newY)) // Si il n'y a aucun pion sur cette case
 		return false;
 
-	if((this->caseLibre(x, y)) && (m_tab[newX][newY] == m_tourDeJouer)) // Si il s'agit de poser un pion à côté d'un autre pion allié
+	if((this->caseLibre(x, y)) && (m_tab[newX][newY] == m_tourDeJouer)) // Si il s'agit de poser un pion a côte d'un autre pion allie
 		return false;
 
 	if(m_tab[newX][newY] == m_tourDeJouer) // Si le pion suivant est de la même couleur que nous
 		return true;
 	else
-		return this->voisinageRecursive(newX, newY, dx, dy); // Sinon, le pion est blanc et on rappelle la fonction récursive
+		return this->voisinageRecursive(newX, newY, dx, dy); // Sinon, le pion est blanc et on rappelle la fonction recursive
 }
 
 void Tablier::retournerPionsRecursive(int x, int y, int dx, int dy)
 {
-	/// Données
+	/// Donnees
 	int newX = x + dx, newY = y + dy;
 
 	/// Traitement
-	if(m_tab[newX][newY] == m_tourDeJouer) // On a atteint un pion allié, soit l'extremité de l'encadrement
+	if(m_tab[newX][newY] == m_tourDeJouer) // On a atteint un pion allie, soit l'extremite de l'encadrement
 		return;
-	else { 	// Sinon, on est forcément tombé sur un pion ennemi qu'on retourne, et on rappelle la fonction récursive
+	else { 	// Sinon, on est forcement tombe sur un pion ennemi qu'on retourne, et on rappelle la fonction recursive
 		m_tab[newX][newY] = m_tourDeJouer;
 		this->retournerPionsRecursive(newX, newY, dx, dy);
 	}
@@ -195,7 +199,7 @@ void Tablier::retournerPionsRecursive(int x, int y, int dx, int dy)
 
 int Tablier::nombreDePion(char couleur)
 {
-	/// Données
+	/// Donnees
 	int compteur = 0;
 
 	/// Traitement
@@ -230,6 +234,6 @@ bool Tablier::finDuJeux()
 				return false;
 		}
 	}
-	// Si aucune condition n'a renvoyé false, donc qu'il n'y a pas de sélection valide que l'on peut faire, c'est la fin du jeux
+	// Si aucune condition n'a renvoye false, donc qu'il n'y a pas de selection valide que l'on peut faire, c'est la fin du jeux
 	return true;
 }

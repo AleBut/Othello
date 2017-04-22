@@ -1,7 +1,13 @@
+/*!
+* \file GraphicAllegro.cpp
+* \brief Description du namespace et fonctions graphique::
+*/
+
 #include "GraphicAllegro.h"
 #include "Config.h"
 
 #include <allegro.h>
+#include <stdlib.h> // RANDOM
 
 
 void graphique::demarer_allegro()
@@ -66,20 +72,20 @@ void graphique::afficherMessage(std::string message)
 
 void graphique::selectionCase(int &x, int &y)
 {
-	// Données
+	/// Données
 	int click, xClick, yClick;
 
-	// Traitement
+	/// Traitement
 	while(1)
 	{
 		if(mouse_b&1) {
 				click++;
 				// En cas de clic
 				if(click == 1) {
-					xClick = mouse_x;
+					xClick = mouse_x; // On récupère les coordonnées en pixel
 					yClick = mouse_y;
 
-					x = (xClick - (xClick%PION_TAILLE))/PION_TAILLE;
+					x = (xClick - (xClick%PION_TAILLE))/PION_TAILLE; // Conversion en numéro de case
 					y = (yClick - (yClick%PION_TAILLE))/PION_TAILLE;
 
 					if((x >= 0) && (x < TAB_TAILLE) && (y >= 0) && (y < TAB_TAILLE))
